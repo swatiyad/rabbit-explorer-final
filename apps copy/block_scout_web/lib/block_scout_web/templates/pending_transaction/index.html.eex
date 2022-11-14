@@ -1,0 +1,66 @@
+<section class="container" data-page="transaction-pending-list">
+  <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
+  <div class="row mb-2" data-async-listing="<%= @current_path %>">
+      <div class="col-md-6">
+        <h1 class="mb-2 list-title-description">
+          <%= gettext "Pending Transactions" %>
+        </h1>
+      </div>
+      <div class="col-md-6">
+        <div class="list-top-pagination-container-wrapper mt-2">
+          <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "top", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
+        </div>
+      </div>
+  </div>
+  <div class="card">
+    <div class="card-body overflow-auto p-0" data-async-listing="<%= @current_path %>">
+
+      <div class="list-top-pagination-container-wrapper">
+        <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "top", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
+      </div>
+ 
+      <div data-selector="channel-batching-message" style="display: none;">
+        <div data-selector="reload-button" class="alert alert-info">
+          <a href="#" class="alert-link"><span data-selector="channel-batching-count"></span> <%= gettext "More transactions have come in" %></a>
+        </div>
+      </div>
+      <%= render BlockScoutWeb.CommonComponentsView, "_channel_disconnected_message.html", text: gettext("Connection Lost, click to load newer transactions") %>
+      <button data-error-message class="alert alert-danger col-12 text-left" style="display: none;">
+        <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
+      </button>
+      <div class="table-hover">
+        <table class="table mb-0 fixed-layout">
+              <thead>
+                <tr class="table-head">
+                  <th class="wideRow">Txn Hash</th>
+                  <th class="screenRow">Method</th>
+                  <th class="screenRow">Block Status</th>
+                  <th class="screenRow">Age</th>
+                  <th class="screenRow">From </th>
+                  <th class="" style="width:36px"></th>
+                  <th class="screenRow">To</th>
+                  <th class="screenRow">Amount</th>
+                  <th class="screenRow">Txn Fee</th>
+                  <%# <th class="screenRow">Status</th> %>
+                </tr>
+              </thead>
+        </table>
+      </div>
+      <div data-items data-selector="transactions-pending-list">
+        <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+      </div>
+      <div data-empty-response-message class="tile tile-muted text-center m-3" style="display: none;">
+        <span data-selector="empty-transactions-list">
+          <%= gettext "There are no pending transactions." %>
+        </span>
+      </div>
+      <div class="col-md-12 py-2">
+        <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "bottom", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
+      </div>
+    </div>
+  </div>
+
+
+  <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/pending-transactions.js") %>"></script>
+  <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/token-transfers-toggle.js") %>"></script>
+</section>

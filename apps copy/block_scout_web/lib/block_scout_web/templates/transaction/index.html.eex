@@ -1,0 +1,59 @@
+<script>
+  function ShowLayoutContainer() {
+
+    document.getElementsByClassName("layout-container")[0].style.visibility = "visible";
+  }
+  window.onload = ShowLayoutContainer()
+</script>
+<section class="container" data-page="transaction-list">
+  <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
+  <div class="card">
+    <div class="card-body table-responsive p-0" data-async-listing="<%= @current_path %>">
+      <div data-selector="channel-batching-message" class="d-none">
+        <div data-selector="reload-button" class="alert alert-info">
+          <a href="#" class="alert-link"><span data-selector="channel-batching-count"></span> <%= gettext "More transactions have come in" %></a>
+        </div>
+      </div>
+      <%= render BlockScoutWeb.CommonComponentsView, "_channel_disconnected_message.html", text: gettext("Connection Lost, click to load newer transactions") %>
+
+      <button data-error-message class="alert alert-danger col-12 text-left" style="display: none;">
+        <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
+      </button>
+
+      <div data-empty-response-message style="display: none;">
+        <div class="tile tile-muted text-center m-3">
+          <span data-selector="empty-internal-transactions-list">
+            <%= gettext "There are no transactions." %>
+          </span>
+        </div>
+      </div>
+          <div class="table-hover">
+            <table class="table mb-0 fixed-layout">
+                  <thead>
+                    <tr class="table-head">
+                      <th class="wideRow">Txn Hash</th>
+                      <th class="screenRow">Method</th>
+                      <th class="screenRow">Block</th>
+                      <th class="screenRow">Age</th>
+                      <th class="screenRow">From </th>
+                      <th class="" style="width:36px"></th>
+                      <th class="screenRow">To</th>
+                      <th class="screenRow">Amount</th>
+                      <th class="screenRow">Txn Fee</th>
+                      <%# <th class="screenRow">Status</th> %>
+                    </tr>
+                  </thead>
+                </table>
+         </div>
+
+      <div data-selector="transactions-list" data-items>
+        <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+      </div>
+
+
+
+  </div>
+  <div class="col-md-12 py-2"> <%= render BlockScoutWeb.CommonComponentsView, "_rap_pagination_container.html", position: "bottom" %></div>
+  <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/validated-transactions.js") %>"></script>
+  <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/token-transfers-toggle.js") %>"></script>
+</section>

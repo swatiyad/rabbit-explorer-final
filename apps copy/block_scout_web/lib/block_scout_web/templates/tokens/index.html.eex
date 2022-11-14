@@ -1,0 +1,67 @@
+<section
+	class="container"
+	data-page="tokens"
+	data-chain-id="<%= Application.get_env(:block_scout_web, :chain_id) %>"
+	data-display-token-icons="<%= System.get_env("DISPLAY_TOKEN_ICONS") %>"
+>
+  <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
+	<div class="row mb-2">
+		<div class="col-md-6">
+			<h1 class="mb-2 list-title-description">
+			<%= gettext "Tokens" %>
+			</h1>
+		</div>
+		<div class="col-md-6">
+			<label class="tokens-list-search-input-container tokens ml-3 mt-sm-45 white-bg">
+			<input data-search-field="" class="form-control tokens-list-search-input search-input" type="text" name="filter" placeholder="Token name or symbol" id="search-text-input" />
+			</label>
+			<div class="list-top-pagination-container-wrapper mt-2">
+				<%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "top", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
+			</div>
+		</div>
+	</div>
+
+  <div class="card">
+    <div class="card-body p-0" data-async-load data-async-listing="<%= @current_path %>" data-no-self-calls>
+    <div class="">
+      <div class="stakes-table-container table-responsive table-hover">
+			<table class="table">
+			<thead>
+				<tr class="table-head">
+				<th> SN.
+
+				</th>
+				<th>
+
+				</th>
+				<th>
+					Token
+				</th>
+				<th>
+					Address
+				</th>
+				<th>
+
+					Total Supply
+
+				</th>
+				<th>
+
+					Holders Count
+
+				</th>
+				</tr>
+			</thead>
+			<tbody data-items data-selector="top-tokens-list">
+				<%= render BlockScoutWeb.CommonComponentsView, "_table-loader.html", columns_num: 6 %>
+			</tbody>
+			</table>
+      </div>
+    </div>
+
+    <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "bottom", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
+    </div>
+  </div>
+  <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/tokens.js") %>"></script>
+  <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/token-transfers-toggle.js") %>"></script>
+</section>

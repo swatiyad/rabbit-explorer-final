@@ -1,0 +1,6 @@
+<span class="loadersmall mr-1">
+    <img src="/images/loadersmall.png"/>
+</span>
+<span>
+    <%= if assigns[:loading_text], do: @loading_text %>
+</span>

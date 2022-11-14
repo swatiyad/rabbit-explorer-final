@@ -1,0 +1,105 @@
+<%# <div class="container-fluid">
+<div  class="background-style-setter text-white" >
+<div class="container head-setter py-5">
+ ACCOUNT OVERVIEW<div><b class="">Home -</b> KYC FORM
+ </div>
+</div>
+</div> %>
+
+<div class="container">
+    <div class="row px-3">
+        <div class="col-lg-3 col-sm-12 col-md-4 bg-white py-2 shadow border rounded stickysidebar mb-5 last_in_mobile">
+          <div class="card-body border-0 px-2">
+            <h2 class="card-title">Quick Links</h2>
+            <ul class="side_nav my-3">
+            <li><%= link("KYC Verification", to: "/kycselect")%></li>
+            <li><%= link("Contract Address verification", to: "/#")%></li>
+            <li><%= link("Token Update", to: "/tokenupdate")%></li>
+            <li><%= link("Audit Contract", to: "/auditContract")%></li>
+            </ul>
+            </div>
+            <div class="card-body border-0 px-2">
+              <div class="card-title">Watch List & Notes</div>
+              <ul class="side_nav my-3">
+              <li><%= link("Watch List", to: "/#")%></li>
+              <li><%= link("Private Name Tag", to: "/#")%></li>
+              <li><%= link("txn Private Notes", to: "/#")%></li>
+              </ul>
+          </div>
+        </div>
+        <div class="col-lg-9 col-sm-12 col-md-8 mb-5 px-4">
+        <h1>Auditing Companies</h1>
+        <hr class="hor_line">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card basic-card bg-light">
+                        <div class="card-content">
+                            <h2 class="text-success">Nadcab Tecnology</h2>
+                            <p>
+                            One Of Best Aduiting Company
+                            <br>
+                            Auditing price starting From Just 50$
+                            </p>
+                        </div>
+
+                        <div class="card-footer text-center">
+                           <a href="#" class="card-link">Audit Contract</a>
+                            <a href="#" class="card-link">Pay Amount</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card basic-card bg-light">
+                        <div class="card-content">
+                            <h2 class="">Nadcab Tecnology</h2>
+                            <p>
+                            One Of Best Aduiting Company
+                            <br>
+                            Auditing price starting From Just 50$
+                            </p>
+                        </div>
+
+                        <div class="card-footer text-center">
+                           <a href="#" class="card-link">Audit Contract</a>
+                            <a href="#" class="card-link">Pay Amount</a>
+                        </div>
+                    </div>
+                </div>
+               <div class="col-lg-4">
+                    <div class="card basic-card bg-light">
+                        <div class="card-content">
+                            <h2 class="">Nadcab Tecnology</h2>
+                            <p>
+                            One Of Best Aduiting Company
+                            <br>
+                            Auditing price starting From Just 50$
+                            </p>
+                        </div>
+
+                        <div class="card-footer text-center">
+                           <a href="#" class="card-link">Audit Contract</a>
+                            <a href="#" class="card-link">Pay Amount</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card basic-card bg-light">
+                        <div class="card-content">
+                            <h2 class="">Nadcab Tecnology</h2>
+                            <p>
+                            One Of Best Aduiting Company
+                            <br>
+                            Auditing price starting From Just 50$
+                            </p>
+                        </div>
+
+                        <div class="card-footer text-center">
+                           <a href="#" class="card-link">Audit Contract</a>
+                            <a href="#" class="card-link">Pay Amount</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

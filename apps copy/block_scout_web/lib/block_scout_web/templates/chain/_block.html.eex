@@ -1,0 +1,52 @@
+<% burned_fee = if !is_nil(@block.base_fee_per_gas), do: Wei.mult(@block.base_fee_per_gas, BlockBurnedFeeCounter.fetch(@block.hash)), else: nil %>
+<% priority_fee = if !is_nil(@block.base_fee_per_gas), do: BlockPriorityFeeCounter.fetch(@block.hash), else: nil %>
+
+
+<div class="block-cards white-bg border rounded shadow-sm fade-up-blocks-chain" data-selector="chain-block" data-block-number="<%= @block.number %>" >
+  <div class="">
+    <div class="">
+      <div class="d-flex justify-content-between">
+        <%= link(
+              @block,
+              class: "text-success font18",
+              to: block_path(BlockScoutWeb.Endpoint, :show, @block),
+              "data-selector": "block-number"
+            ) %>
+        <span class="text-nowrap text-dark" time-block data-from-now="<%= @block.timestamp %>"> </span>
+      </div>
+      <div class="tileee tile-bottom-contents mb-0 border-top">
+        <div class="tile-transactions d-flex justify-content-between align-items-center mb-3">
+          <div class="gray-text">
+            <%= gettext("Txns %{count} ", count: Enum.count(@block.transactions)) %>
+          </div>
+          <%# <%= if BlockScoutWeb.BlockView.show_reward?(@block.rewards) do %>
+            <div class="">
+              <span class="gray-text"><%= gettext "Reward" %></span>
+              <span><%= BlockScoutWeb.BlockView.combined_rewards_value(@block) %></span>
+            </div>
+        <%# <% end %>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <%= if System.get_env("HIDE_BLOCK_MINER") !== "true" do %>
+            <div class="text-truncate width110">
+              <span class="gray-text"><%= gettext "Miner" %></span>
+              <%= render BlockScoutWeb.AddressView,
+                "_link.html",
+                address: @block.miner,
+                contract: false,
+                use_custom_tooltip: false,
+                custom_classes_tooltip: ["miner-address-tooltip"] %>
+            </div>
+          <% end %>
+          <div class="">
+            <span class="gray-text"><%= gettext "Txn Fee" %></span>
+              <span>
+            <%= format_wei_value(%Wei{value: priority_fee}, :ether) %>
+                    <%# <% gas = if Decimal.cmp(@block.gas_limit, 0) == :gt, do: Decimal.to_integer(@block.gas_used) / Decimal.to_integer(@block.gas_limit), else: 0  %>
+                    </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

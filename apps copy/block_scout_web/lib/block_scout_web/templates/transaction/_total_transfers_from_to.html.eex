@@ -1,0 +1,41 @@
+<%= with {:ok, from_address} <- Chain.hash_to_address(@transfer.from_address_hash),
+{:ok, to_address} <- Chain.hash_to_address(@transfer.to_address_hash) do %>
+<%  from_tags = BlockScoutWeb.Models.GetAddressTags.get_address_tags(@transfer.from_address_hash, @current_user) %>
+<%  to_tags = BlockScoutWeb.Models.GetAddressTags.get_address_tags(@transfer.to_address_hash, @current_user) %>
+<tr>
+
+        <td class="address-mobile">
+        <b>From</b> :
+        <%= render BlockScoutWeb.AddressView, "_link.html", address: from_address, contract: BlockScoutWeb.AddressView.contract?(from_address), use_custom_tooltip: false, trimmed: false %>
+
+
+        <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy_for_table.html",
+        additional_classes: ["btn-copy-icon-small", "btn-copy-icon-custom", "btn-copy-icon-no-borders", "btn-copy-token-transfer"],
+        clipboard_text: from_address,
+        aria_label: gettext("Copy From Address"),
+        title: gettext("Copy From Address"),
+        style: "position: relative;" %>
+        </td>
+</tr>
+<tr>
+
+        <td class="address-mobile">
+         <b style="margin-right: 15px;">To  </b>:
+                <%= render BlockScoutWeb.AddressView, "_link.html", address: to_address, contract: BlockScoutWeb.AddressView.contract?(to_address), use_custom_tooltip: false, trimmed: false %>
+                <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy_for_table.html",
+                additional_classes: ["btn-copy-icon-small", "btn-copy-icon-custom", "btn-copy-icon-no-borders", "btn-copy-token-transfer"],
+                clipboard_text: to_address,
+                aria_label: gettext("Copy To Address"),
+                title: gettext("Copy To Address"),
+                style: "position: relative;"%>
+        </td>
+</tr>
+<tr>
+
+        <% end %>
+        <td class="address-mobile" style="word-break: break-all; white-space: nowrap;">
+            <div class="d-flex"><div><b style="margin-right: 10px;"> For  </b>: </div>
+                <%= render BlockScoutWeb.TransactionView, "_total_transfers.html", transfer: @transfer %></div>
+        </td>
+</tr>
+<tr><td style="height: 10px;"></td></tr>

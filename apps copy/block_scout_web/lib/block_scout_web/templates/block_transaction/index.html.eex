@@ -1,0 +1,57 @@
+<section class="container">
+
+  <%= render BlockScoutWeb.BlockView, "overview.html", assigns %>
+
+  <section>
+    <div class="card mb-5 shadow border">
+      <div class="card-tabs js-card-tabs bg-lighter">
+        <%=
+          link(
+            gettext("Transactions"),
+            class: "card-tab #{tab_status("transactions", @conn.request_path)}",
+            to: block_transaction_path(@conn, :index, @conn.params["block_hash_or_number"])
+            )
+        %>
+      </div>
+
+      <div class="card-body overflow-auto" data-async-load data-async-listing="<%= @current_path %>" id="txs">
+
+      <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "top", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
+
+        <button data-error-message class="alert alert-danger col-12 text-left" style="display: none;">
+          <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
+        </button>
+
+        <div data-empty-response-message style="display: none;">
+          <div class="tile tile-muted text-center m-3" data-selector="empty-transactions-list">
+            <%= gettext "There are no transactions for this block." %>
+          </div>
+        </div>
+        <!-- Table heading-->
+        <table class="table table-hover mb-0 fixed-layout">
+          <thead>
+            <tr class="table-head">
+              <th class="wideRow">Txn Hash</th>
+              <th class="screenRow">Method</th>
+              <th class="screenRow">Block</th>
+              <th class="screenRow">Age</th>
+              <th class="screenRow">From</th>
+              <th class="" style="width:36px"></th>
+              <th class="screenRow">To</th>
+              <th class="screenRow">Amount</th>
+              <th class="screenRow">Txn Fee</th>
+            </tr>
+          </thead>
+        </table>
+
+        <div data-items>
+          <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+        </div>
+
+        <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "bottom", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
+
+    </div>
+    <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/async-listing-load.js") %>"></script>
+    <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/token-transfers-toggle.js") %>"></script>
+  </section>
+</section>
